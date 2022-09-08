@@ -12,18 +12,9 @@
 #define F_OK 0
 #define access _access
 
-_Bool LogCreated; // keeps track whether the log file is created or not
-_Bool normalTime; // used for the timestamp format hh:mm:ss or unix
+_Bool LogCreated = false; // keeps track whether the log file is created or not
+_Bool normalTime = true; // used for the timestamp format hh:mm:ss or unix
 
-void Log(char *message, ...); // logs a message to LOGFILE
-
-void LogErr(char* message, ...); // logs a message; execution is interrupted
-
-
-_Bool LogCreated = false;
-_Bool normalTime = true;
-
-//void Log(char *message)
 void Log(char* message, ...)
 {
 	/*todo:
@@ -54,7 +45,7 @@ void Log(char* message, ...)
 
 	FILE *file;
 
-	if (_access(logfile, F_OK) == 0) {
+	if (access(logfile, F_OK) == 0) {
 		// file exists
 		file = fopen(logfile, "a");
 	}
